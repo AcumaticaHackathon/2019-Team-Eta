@@ -1,24 +1,64 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Acumatica - Login</title>
     <link rel="stylesheet" type="text/css" href="css/popup.css">
+    <link rel="stylesheet" type="text/css" href="css/tree.css">
+    <script src="script.js"></script>
 </head>
 <body>
-<div id="login_data">
-    <div id="login_logo">
-        <a class="logo" id="panelT_logoCell" tabindex="-1" target="_blank" href="http://www.acumatica.com">
-            <img src="images/login_logo.png" class="login_img" alt="logo"/>
-        </a>
+    <div id="login_data">
+        <div id="login_logo">
+            <a class="logo" id="panelT_logoCell" tabindex="-1" target="_blank" href="http://www.acumatica.com">
+                <img src="images/login_logo.png" class="login_img" alt="logo" />
+            </a>
+        </div>
+        <div id="login_user">
+            <input type="text" class="login-input border-box" placeholder="My Username" />
+        </div>
+        <div id="login_ext">
+            <input type="password" class="login-input border-box" placeholder="My Password" />
+        </div>
+        <button id="loginBtn" class="login-btn">Sign In</button>
     </div>
-    <div id="login_user">
-        <input type="text" class="login-input border-box" placeholder="My Username"/>
+
+    <div class="tree">
+        <ul id="myUL">
+            <li><span class="caret">F100</span>
+                <ul class="nested">
+                    <li><span class="caret">Part 1</span></li>
+                    <li><span class="caret">Part 2</span>
+                        <ul class="nested">
+                            <li><span class="caret">Lesson 5</span></li>
+                            <li><span class="caret">Lesson 6</span>
+                                <ul class="nested">
+                                    <li><a class="step" href="http://localhost/HackathonSummit19/Main?ScreenId=AP301000">Step
+                                            6.1</a>
+                                    </li>
+                                    <li><a class="step" href="http://localhost/HackathonSummit19/Main?ScreenId=AP301000">Step
+                                            6.2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><span class="caret">Lesson 7</span></li>
+                            <li><span class="caret">Lesson 8</span></li>
+                        </ul>
+                    <li><span class="caret">Part 3</span></li>
+            </li>
+        </ul>
+        <li><span class="caret">F200</span></li>
+        <li><span class="caret">F310</span></li>
+        <li><span class="caret">F320</span></li>
+        <li><span class="caret">F330</span></li>
+        <li><span class="caret">F335</span></li>
+        <li><span class="caret">F340</span></li>
+        <li><span class="caret">F350</span></li>
+        <li><span class="caret">T100</span></li>
+        <li><span class="caret">T200</span></li>
+        <li><span class="caret">T300</span></li>
     </div>
-    <div id="login_ext">
-        <input type="password" class="login-input border-box" placeholder="My Password"/>
-    </div>
-    <button id="loginBtn" class="login-btn">Sign In</button>
-</div>
-<script src="popup.js"></script>
+    <script src="popup.js"></script>
 </body>
+
 </html>
