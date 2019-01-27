@@ -25,6 +25,13 @@ window.addEventListener('load', function load(event) {
         });
     };
 
+    document.getElementById('resetBtn').onclick = function () {
+        window.close();
+        chrome.tabs.executeScript({
+            file: 'js/reset.js'
+        });
+    };
+
     reloadScreen();
 });
 
