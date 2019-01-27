@@ -9,7 +9,7 @@ namespace AcumaticaUniversity.ValidationService.Controllers
         [HttpPost]
         public IActionResult Post(SnapshotDto snapshotDto)
         {
-            var path = $"C:\\db\\{snapshotDto.ExerciseId}.bak";
+            var path = $"C:\\db\\{snapshotDto.LessonId}.bak";
 
             var database = new Database();
             database.Restore(path);

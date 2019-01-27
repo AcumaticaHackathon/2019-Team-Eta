@@ -21,7 +21,7 @@ namespace AcumaticaUniversity.ValidationService.Controllers
             using (var acumaticaRestClient = new AcumaticaRestClient())
             {
                 var bills = acumaticaRestClient.GetBills();
-                if (validationDto.Exercise == "6.1.2" && bills.Count > 1 && bills[1].Amount.value != 100)
+                if (validationDto.LessonId == "6.1.2" && bills.Count > 1 && bills[1].Amount.value != 100)
                 {
                     return BadRequest("Incorrect Total was entered");
                 }
@@ -33,7 +33,7 @@ namespace AcumaticaUniversity.ValidationService.Controllers
 
     public class ValidationDto
     {
-        public string Exercise { get; set; }
+        public string LessonId { get; set; }
     }
 
     public class AcumaticaRestClient : IDisposable
@@ -91,6 +91,7 @@ namespace AcumaticaUniversity.ValidationService.Controllers
 
             if (!res.IsSuccessStatusCode)
             {
+                var result = res.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                 throw new Exception($"Login into Acumatica failed");
             }
         }

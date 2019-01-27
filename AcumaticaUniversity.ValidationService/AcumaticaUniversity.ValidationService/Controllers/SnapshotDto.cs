@@ -2,6 +2,6 @@
 {
     public class SnapshotDto
     {
-        public string ExerciseId { get; set; }
+        public string LessonId { get; set; }
     }
 }
