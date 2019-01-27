@@ -14,10 +14,19 @@ setTimeout(function () {
     myscript.src = '//cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js';
     iFrameBody.appendChild(myscript);
 
-    iframe.getElementById('ctl00_phF_form_t0_edRefNbr_text').setAttribute('data-intro', 'Hello step one!');
+    let fields = [
+        {'ctl00_phF_form_t0_edDocType': 'Office supplies Bill should have the type \'Bill\''},
+        {'ctl00_phF_form_t0_edVendorID_text': 'Can be filled in with \'V000000001\' (OfficeSuppliesCo)'},
+        {'ctl00_phF_form_t0_edDocDate_text': 'Can be filled in with \'1/1/2018\''},
+        {'ctl00_phF_form_t0_edFinPeriodID_text': 'Can be filled in with \'01-2018\''},
+        {'ctl00_phF_form_t0_edInvoiceNbr': 'Specify the number the vendor has assigned to the incoming document'},
+        {'ctl00_phF_form_t0_edDocDesc': 'For example \'Office supplies 01-2018\''},
+        {'ctl00_phF_form_t0_chkHold': 'Should be Cleared (to make the document ready for release)'}
+    ]
 
-    console.log('attr: ' + iframe.getElementById('ctl00_phF_form_t0_edRefNbr_text').getAttribute('data-intro'));
-
+    for (var i = 0; i < fields.length; i++) {
+        setDataIntroAttrToParent(iframe, Object.keys(fields[i])[0], Object.values(fields[i])[0], i + 1)
+    }
 
     var yourCustomJavaScriptCode = 'setTimeout(function () {introJs().start();}, 1000);';
     var script = document.createElement('script');
@@ -25,6 +34,19 @@ setTimeout(function () {
     script.appendChild(code);
     iFrameBody.appendChild(script);
 
+    var yourCustomCssCode = '.introjs-helperNumberLayer { top: -20px !important; left: -8px !important; background: #007acc !important; }';
+    var script = document.createElement('style');
+    script.appendChild(document.createTextNode(yourCustomCssCode));
+    iFrameHead.appendChild(script);
+
 }, 3000);
+
+function setDataIntroAttrToParent(container, id, text, orderId) {
+    if (container.getElementById(id)) {
+        var parentDiv = container.getElementById(id).closest('.cell-w');
+        parentDiv.setAttribute('data-intro', text);
+        parentDiv.setAttribute('data-step', orderId);
+    }
+}
 
 
