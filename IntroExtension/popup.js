@@ -8,7 +8,13 @@ window.addEventListener('load', function load(event) {
         hideElement('login_data');
         showElement('tree');
 
-        chrome.storage.sync.set({key: '6.1.3'});
+        chrome.storage.sync.set({ key: '6.1.3' });
+    };
+
+    document.getElementById('helpBtn').onclick = function () {
+        chrome.tabs.executeScript({
+            file: 'js/wizard.js'
+        });
     };
 
     reloadScreen();
