@@ -1,0 +1,44 @@
+{
+  "manifest_version": 2,
+  "name": "Acumatica University",
+  "short_name": "Acumatica University",
+  "description": "Acumatica University.",
+  "version": "1.0.0",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "tts",
+    "storage",
+    "ttsEngine",
+    "contextMenus",
+    "http://localhost/AcumaticaERP/"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/intro/intro.min.js",
+        "js/test.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}
