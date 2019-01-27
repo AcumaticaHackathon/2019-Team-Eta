@@ -7,8 +7,6 @@ window.addEventListener('load', function load(event) {
     document.getElementById('loginBtn').onclick = function () {
         hideElement('login_data');
         showElement('tree');
-
-        chrome.storage.sync.set({ key: '6.1.3' });
     };
 
     var substeps = document.getElementsByClassName('substep');
@@ -17,6 +15,10 @@ window.addEventListener('load', function load(event) {
             chrome.tabs.executeScript({
                 file: 'js/redirect.js'
             });
+            chrome.storage.sync.set({ key: this.text }, function () {
+            });
+
+            window.close();
         };
     }
 
