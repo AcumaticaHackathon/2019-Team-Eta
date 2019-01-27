@@ -22,9 +22,14 @@ namespace AcumaticaUniversity.ValidationService.Controllers
             using (var internalClient = new AcumaticaRestClient("http://localhost/acumaticaerp", "admin", "Hack@2019"))
             {
                 var bills = internalClient.GetBills();
-                if (validationDto.LessonId == "6.1.3" && bills[0].Amount.value != 30)
+                if (validationDto.LessonId == "6.1.3" && bills.Count > 2 && bills[2].Amount.value != 2200)
                 {
                     return BadRequest("Incorrect Total was entered");
+                }
+
+                if (validationDto.LessonId == "6.1.3" && bills.Count <= 2)
+                {
+                    return BadRequest("Invoice is missing");
                 }
 
                 using (var externalClient = new AcumaticaRestClient("http://hackathon.acumatica.com/beta", "admin", "Password1!"))
