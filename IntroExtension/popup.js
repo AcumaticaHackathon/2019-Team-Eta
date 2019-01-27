@@ -11,6 +11,15 @@ window.addEventListener('load', function load(event) {
         chrome.storage.sync.set({ key: '6.1.3' });
     };
 
+    var substeps = document.getElementsByClassName('substep');
+    for (i = 0; i < substeps.length; i++) {
+        substeps[i].onclick = function () {
+            chrome.tabs.executeScript({
+                file: 'js/redirect.js'
+            });
+        };
+    }
+
     document.getElementById('helpBtn').onclick = function () {
         window.close();
         chrome.tabs.executeScript({
@@ -70,7 +79,8 @@ function TreeView() {
 
         for (i = 0; i < steps.length; i++) {
             steps[i].addEventListener("click", function () {
-                window.location.href = this.href;
+                chrome.storage.sync.set({ key: this.text }, function () {
+                });
             });
         }
     });
