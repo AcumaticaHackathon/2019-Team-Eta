@@ -1,0 +1,43 @@
+.login_img {
+    margin-bottom: 10px;
+    padding: 6px 8px;
+    width: 200px;
+    border-width: 0px;
+}
+
+select:focus, input[type="text"]:focus {
+    outline: auto 5px -webkit-focus-ring-color;
+}
+
+.login-btn {
+    float: right;
+    color: white;
+    margin-bottom: 10px;
+    padding: 6px 8px;
+    width: 120px;
+    background-color: #43abf7;
+    border: solid 1px #43abf7;
+    border-radius: 5px;
+    font-family: Arial,sans-serif, Tahoma, Verdana;
+    font-size: 12pt;
+    font-weight: 500;
+}
+
+.login-input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 6px 8px;
+    border: solid 1px RGBA(0, 0, 0, 0.12);
+    border-radius: 3px;
+
+    font-family: Arial,sans-serif, Tahoma, Verdana;
+    color: rgba(0, 0, 0, 0.64);
+    font-size: 10pt;
+    font-weight: 500;
+}
+
+.border-box {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}

@@ -1,5 +1,4 @@
 setTimeout(function () {
-    debugger;
     console.log('inject intro references')
     var iframe = window.frames["main"].document;
     var iFrameHead = iframe.getElementsByTagName("head")[0];
