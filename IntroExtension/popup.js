@@ -1,9 +1,26 @@
 window.addEventListener('load', function load(event) {
-    document.getElementById('loginBtn').onclick = function() {
-        chrome.tabs.executeScript({
-            file: 'js/validation.js'
-          }); 
+
+    document.getElementById('backBtn').onclick = function () {
+        chrome.storage.sync.remove('key');
     };
+
+    document.getElementById('loginBtn').onclick = function () {
+        hideElement('login_data');
+        showElement('tree');
+    };
+
+    chrome.storage.sync.get(null, function (items) {
+        var allKeys = Object.keys(items);
+        if (!allKeys.includes('key')) {
+            hideElement('tree');
+            hideElement('activeClass');
+        }
+        else {
+            hideElement('login_data');
+            hideElement('tree');
+            showElement('activeClass');
+        }
+    });
 });
 
 
@@ -30,4 +47,14 @@ function TreeView() {
             });
         }
     });
+}
+
+function showElement(elementId) {
+    var x = document.getElementById(elementId);
+    x.style.display = "block";
+}
+
+function hideElement(elementId) {
+    var x = document.getElementById(elementId);
+    x.style.display = "none";
 }
