@@ -1,19 +1,28 @@
 window.addEventListener('load', function load(event) {
-
     document.getElementById('backBtn').onclick = function () {
         chrome.storage.sync.remove('key');
+        reloadScreen();
     };
 
     document.getElementById('loginBtn').onclick = function () {
         hideElement('login_data');
         showElement('tree');
+
+        chrome.storage.sync.set({key: '6.1.3'});
     };
 
+    reloadScreen();
+});
+
+TreeView();
+
+function reloadScreen() {
     chrome.storage.sync.get(null, function (items) {
         var allKeys = Object.keys(items);
         if (!allKeys.includes('key')) {
             hideElement('tree');
             hideElement('activeClass');
+            showElement('login_data');
         }
         else {
             hideElement('login_data');
@@ -21,10 +30,7 @@ window.addEventListener('load', function load(event) {
             showElement('activeClass');
         }
     });
-});
-
-
-TreeView();
+}
 
 function TreeView() {
     window.addEventListener('load', function load(event) {
