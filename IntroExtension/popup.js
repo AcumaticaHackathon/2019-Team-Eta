@@ -12,12 +12,14 @@ window.addEventListener('load', function load(event) {
     };
 
     document.getElementById('helpBtn').onclick = function () {
+        window.close();
         chrome.tabs.executeScript({
             file: 'js/wizard.js'
         });
     };
 
     document.getElementById('validateBtn').onclick = function () {
+        window.close();
         chrome.tabs.executeScript({
             file: 'js/validation.js'
         });
