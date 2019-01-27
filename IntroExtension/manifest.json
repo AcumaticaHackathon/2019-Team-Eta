@@ -30,7 +30,8 @@
         "https://*/*"
       ],
       "js": [
-        "js/intro/intro.min.js"
+        "js/sweet-alert.min.js",
+        "js/test.js"
       ],
       "run_at": "document_end"
     }
