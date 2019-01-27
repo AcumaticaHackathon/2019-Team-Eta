@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace AcumaticaUniversity.ValidationService.Controllers
@@ -18,12 +19,17 @@ namespace AcumaticaUniversity.ValidationService.Controllers
         [HttpPost]
         public ActionResult Post(ValidationDto validationDto)
         {
-            using (var acumaticaRestClient = new AcumaticaRestClient())
+            using (var internalClient = new AcumaticaRestClient("http://localhost/acumaticaerp", "admin", "Hack@2019"))
             {
-                var bills = acumaticaRestClient.GetBills();
+                var bills = internalClient.GetBills();
                 if (validationDto.LessonId == "6.1.3" && bills[0].Amount.value != 30)
                 {
                     return BadRequest("Incorrect Total was entered");
+                }
+
+                using (var externalClient = new AcumaticaRestClient("http://hackathon.acumatica.com/beta", "admin", "Password1!"))
+                {
+                    externalClient.Finish();
                 }
 
                 return Ok();
@@ -43,8 +49,11 @@ namespace AcumaticaUniversity.ValidationService.Controllers
         private string _username = "admin";
         private string _password = "Hack@2019";
 
-        public AcumaticaRestClient()
+        public AcumaticaRestClient(string url, string username, string password)
         {
+            this._acumaticaBaseUrl = url;
+            this._username = username;
+            this._password = password;
             Login();
         }
 
@@ -59,6 +68,73 @@ namespace AcumaticaUniversity.ValidationService.Controllers
             var result = httpResponseMessage.Content.ReadAsAsync<List<dynamic>>().GetAwaiter().GetResult();
             return result;
         }
+
+        public void Finish()
+        {
+
+
+            var body = @"
+{
+
+""EmployeeID"": {
+
+""value"": ""EP00000002""
+
+},
+
+""Training"": [
+
+{
+
+""BAccountID"": {
+
+""value"": 2892
+
+},
+
+""LessonCD"": {
+
+""value"": ""Lesson6""
+
+},
+
+""LessonStep"": [
+
+{
+
+""BAccountID"": {
+
+""value"": 2892
+
+},
+
+""LessonID"": {
+
+""value"": 5
+
+},
+
+""LineNbr"": {
+
+""value"": 2
+
+},
+
+""Completed"": {
+
+""value"": true
+
+}
+
+}]
+
+}]
+
+}";
+            var deserializeObject = JsonConvert.DeserializeObject(body);
+            var httpResponseMessage = _httpClient.PutAsJsonAsync($"{_acumaticaBaseUrl}/entity/ETA/18.200.002/Employee?$expand=Training,Training/LessonStep", deserializeObject).GetAwaiter().GetResult();
+        }
+
 
         private void Login()
         {
@@ -111,7 +187,5 @@ namespace AcumaticaUniversity.ValidationService.Controllers
             }
 
         }
-
-
     }
 }
