@@ -1,22 +1,57 @@
 window.addEventListener('load', function load(event) {
+    document.getElementById('backBtn').onclick = function () {
+        chrome.storage.sync.remove('key');
+        reloadScreen();
+    };
+
     document.getElementById('loginBtn').onclick = function () {
+        hideElement('login_data');
+        showElement('tree');
+
+        chrome.storage.sync.set({ key: '6.1.3' });
+    };
+
+    document.getElementById('helpBtn').onclick = function () {
+        window.close();
+        chrome.tabs.executeScript({
+            file: 'js/wizard.js'
+        });
+    };
+
+    document.getElementById('validateBtn').onclick = function () {
+        window.close();
         chrome.tabs.executeScript({
             file: 'js/validation.js'
         });
     };
 
-    var substeps = document.getElementsByClassName('substep');
-    for (i = 0; i < substeps.length; i++) {
-        substeps[i].onclick = function () {
-            chrome.tabs.executeScript({
-                file: 'js/redirect.js'
-            });
-        };
-    }
+    document.getElementById('resetBtn').onclick = function () {
+        window.close();
+        chrome.tabs.executeScript({
+            file: 'js/reset.js'
+        });
+    };
+
+    reloadScreen();
 });
 
-
 TreeView();
+
+function reloadScreen() {
+    chrome.storage.sync.get(null, function (items) {
+        var allKeys = Object.keys(items);
+        if (!allKeys.includes('key')) {
+            hideElement('tree');
+            hideElement('activeClass');
+            showElement('login_data');
+        }
+        else {
+            hideElement('login_data');
+            hideElement('tree');
+            showElement('activeClass');
+        }
+    });
+}
 
 function TreeView() {
     window.addEventListener('load', function load(event) {
@@ -30,14 +65,23 @@ function TreeView() {
             });
         }
 
-        var steps = document.getElementsByClassName("substep");
+        var steps = document.getElementsByClassName("step");
         var i;
 
         for (i = 0; i < steps.length; i++) {
             steps[i].addEventListener("click", function () {
-                chrome.storage.sync.set({ key: this.text }, function () {
-                });
+                window.location.href = this.href;
             });
         }
     });
+}
+
+function showElement(elementId) {
+    var x = document.getElementById(elementId);
+    x.style.display = "block";
+}
+
+function hideElement(elementId) {
+    var x = document.getElementById(elementId);
+    x.style.display = "none";
 }
