@@ -39,3 +39,13 @@ ul,
 .active {
     display: block;
 }
+
+.completed  {
+    color: #00cc40 !important;
+    font-size: 12px !important;
+}
+
+.inprogress  {
+    color: orange !important;
+    font-size: 12px !important;
+}
