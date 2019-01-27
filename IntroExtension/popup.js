@@ -17,6 +17,12 @@ window.addEventListener('load', function load(event) {
         });
     };
 
+    document.getElementById('validateBtn').onclick = function () {
+        chrome.tabs.executeScript({
+            file: 'js/validation.js'
+        });
+    };
+
     reloadScreen();
 });
 
