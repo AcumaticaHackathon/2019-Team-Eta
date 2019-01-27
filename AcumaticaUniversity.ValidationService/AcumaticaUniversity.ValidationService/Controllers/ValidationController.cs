@@ -21,7 +21,7 @@ namespace AcumaticaUniversity.ValidationService.Controllers
             using (var acumaticaRestClient = new AcumaticaRestClient())
             {
                 var bills = acumaticaRestClient.GetBills();
-                if (validationDto.LessonId == "6.1.2" && bills.Count > 1 && bills[1].Amount.value != 100)
+                if (validationDto.LessonId == "6.1.3" && bills[0].Amount.value != 30)
                 {
                     return BadRequest("Incorrect Total was entered");
                 }
