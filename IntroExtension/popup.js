@@ -7,8 +7,6 @@ window.addEventListener('load', function load(event) {
     document.getElementById('loginBtn').onclick = function () {
         hideElement('login_data');
         showElement('tree');
-
-        chrome.storage.sync.set({ key: '6.1.3' });
     };
 
     var substeps = document.getElementsByClassName('substep');
@@ -79,7 +77,7 @@ function TreeView() {
 
         for (i = 0; i < steps.length; i++) {
             steps[i].addEventListener("click", function () {
-                chrome.storage.sync.set({ key: this.text }, function () {
+                    chrome.storage.sync.set({ key: this.text }, function () {
                 });
             });
         }

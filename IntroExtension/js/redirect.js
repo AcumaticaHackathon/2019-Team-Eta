@@ -1,1 +1,1 @@
-window.location.href = "http://localhost/HackathonSummit19/Main?ScreenId=AP301000";
+window.location.href = "http://localhost/AcumaticaERP/Main?ScreenId=AP301000";
