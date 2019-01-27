@@ -14,12 +14,13 @@ myscript.src = '//cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js';
 iFrameBody.appendChild(myscript);
 
 let fields = [
-    { 'ctl00_phF_form_t0_edDocType': 'Office supplies Bill should have the type \'Bill\'' },
-    { 'ctl00_phF_form_t0_edVendorID_text': 'Can be filled in with \'V000000001\' (OfficeSuppliesCo)' },
+    { 'ctl00_phF_form_t0_edDocType': 'Utilities and Rent Bill should have the type \'Bill\'' },
+    { 'ctl00_phF_form_t0_edVendorID_text': 'Can be filled in with \'V000000002\' (UtilitiesCo)' },
     { 'ctl00_phF_form_t0_edDocDate_text': 'Can be filled in with \'1/1/2018\'' },
     { 'ctl00_phF_form_t0_edFinPeriodID_text': 'Can be filled in with \'01-2018\'' },
-    { 'ctl00_phF_form_t0_edInvoiceNbr': 'Specify the number the vendor has assigned to the incoming document' },
-    { 'ctl00_phF_form_t0_edDocDesc': 'For example \'Office supplies 01-2018\'' },
+    { 'ctl00_phF_form_t0_edInvoiceNbr': 'Can be filled in with \'01012018U \'' },
+    { 'ctl00_phF_form_t0_edDocDesc': 'For example \'Rent and utilities bill\'' },
+    // {'amount': 'Can be filled in with\'2200.00\''},
     { 'ctl00_phF_form_t0_chkHold': 'Should be Cleared (to make the document ready for release)' }
 ]
 
@@ -41,8 +42,10 @@ iFrameHead.appendChild(script);
 function setDataIntroAttrToParent(container, id, text, orderId) {
     if (container.getElementById(id)) {
         var parentDiv = container.getElementById(id).closest('.cell-w');
-        parentDiv.setAttribute('data-intro', text);
-        parentDiv.setAttribute('data-step', orderId);
+        if (parentDiv) {
+            parentDiv.setAttribute('data-intro', text);
+            parentDiv.setAttribute('data-step', orderId);
+        }
     }
 }
 
